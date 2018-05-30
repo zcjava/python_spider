@@ -22,8 +22,8 @@ def downloadByUrl(url):
             continue
         name = content.select("td:nth-of-type(1)")[0].string
         suffix = content.select("td:nth-of-type(2)")[0].string
-        storageDir=sys.path[0]+'/books/'+key
-        LocalPath = storageDir+"/books/"+name+"."+suffix
+        storageDir=sys.path[0]+'/books/'+key+'/'
+        LocalPath = storageDir+name+"."+suffix
         bookurl =content.find("a")['href']
         if not os.path.exists(storageDir):
             os.makedirs(storageDir)
@@ -52,7 +52,6 @@ site = 'https://sk.kindleshare.cn/'
 booksKwFile= open(sys.path[0]+"/bookskeyword","r+",encoding='utf-8')
 for key in booksKwFile.readlines():
     key = key.strip('\n')
-    print(key)
     keyword=quote(key)
     url= site +'?name='+keyword+'&submit=Search'
     downloadByUrl(url)
